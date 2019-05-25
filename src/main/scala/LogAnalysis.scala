@@ -20,6 +20,7 @@ class LogAnalysis(spark: SparkSession) {
       if (_ignoredErrors.foldLeft(false)((a, b) => a || x.contains(b))) true else false
     })
     val count = errors.count()
+    // Use collect on driver side only when enough ram exists
     // errors.collect().map(f => { println(f) })
     count
   }
